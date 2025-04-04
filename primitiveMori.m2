@@ -1,6 +1,6 @@
 needsPackage "NormalToricVarieties"
 loadPackage("ToricExtras", Reload=>true)
-load "primitive2max.m2"
+load "primitiveToMax.m2"
 
 -- An updated version 2025-3-12
 -- which can deal with repeated elements
@@ -45,7 +45,7 @@ minimalElementsAlt(List) := (L) -> (
     );
     for k from 0 to (#deleteList - 1) do (
         newList = delete(newList, deleteList#(#deleteList-1-k))
-    )
+    );
     return newList
 )
 
