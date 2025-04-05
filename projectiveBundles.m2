@@ -77,13 +77,13 @@ wFanoRankThreePCThreeBased = (d, d') -> (
     wFanoList
 )
 
-wFanoRankThreePCThree = d -> (
+projectiveBundleVarieties = d -> (
     filterListRepeatsInvName(calculateInvariantsName(flatten(for d' in 2..d-1 list wFanoRankThreePCThreeBased(d, d')), invariantList))
 )
 
 end----
 
-printListName(wFanoRankThreePCThree(3))
-printListName(wFanoRankThreePCThree(4))
-printListName(wFanoRankThreePCThree(5))
--- printListName(wFanoRankThreePCThree(6))
+printListName(projectiveBundleVarieties(3))
+printListName(projectiveBundleVarieties(4))
+printListName(projectiveBundleVarieties(5))
+-- printListName(projectiveBundleVarieties(6))

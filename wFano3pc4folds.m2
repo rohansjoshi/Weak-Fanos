@@ -4,7 +4,7 @@ load "batyrev.m2"
 load "projectiveBundles.m2"
 
 -- complete list of weak Fano
-batyrev3PCWeakFano4folds = wFanoRankThreePCThree(4);
+batyrev3PCWeakFano4folds = projectiveBundleVarieties(4);
 batyrev3PCWeakFano4folds = for i from 0 to (#batyrev3PCWeakFano4folds - 1) list drop(batyrev3PCWeakFano4folds#i,{2,2});
 
 -- list of Fano
