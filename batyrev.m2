@@ -1,5 +1,9 @@
 load "automate.m2"
 
+--- In this document:
+-- automate construction of Kleinschmidt pairs (n, l)
+-- automate construction of Batyrev triples (p, b, c)
+-- automate construction of all weak Fano torics of Picard number 3 that have 5 p.c. (which come from Batyrev construction)
 
 -- Following along the lines of Kleinschmidt's paper "A classification of toric varieties with few generators",
 -- we see that a Kleinschmidt toric variety has exactly two primitive collections (these are U and V) as described in section 2

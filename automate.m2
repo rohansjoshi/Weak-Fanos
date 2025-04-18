@@ -1,8 +1,3 @@
---- In this document:
--- automate construction of Kleinschmidt pairs (n, l)
--- automate construction of Batyrev triples (p, b, c)
--- automate construction of all weak Fano torics of Picard number 3 that have 5 p.c. (which come from Batyrev construction)
-
 needsPackage "NormalToricVarieties";
 needsPackage "ToricExtras"
 needsPackage "InvariantRing";
