@@ -4,6 +4,8 @@
 - Zhengning Hu
 - Rohan Joshi
 
+**Publication:**
+* *Classifying toric weak Fano varieties of Picard rank 3*, Zhengning Hu and Rohan Joshi. In preparation, 2025.
 
 This repository contains functions for constructive smooth projective toric varieties of Picard rank 3 (either as projective bundles or Batyrev varieties), following Batyrev. We also construct all such varieties that are weak Fano. There are functions that automate the process of producing the classification in any dimension, and removing redundant isomorphic copies.
 
