@@ -84,7 +84,7 @@ generateNondecreasingLists = (len, minx, maxx) -> (
     if len == 0 then return {{}};
     lists := {}; -- need := since it's a local variable
     for i from minx to maxx do (
-        subLists = generateLists(len - 1, i, maxx);
+        subLists = generateNondecreasingLists(len - 1, i, maxx);
         for sublist in subLists do (
             lists = append(lists, prepend(i, sublist));
         );
