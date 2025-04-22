@@ -6,7 +6,7 @@ title: Weak-Fanos
 message: >-
   If you use this software, please cite it using the
   metadata from this file.
-type: software
+type: generic
 authors:
   - given-names: Zhengning
     family-names: Hu
@@ -19,13 +19,6 @@ authors:
     affiliation: 'University of California, Los Angeles'
 repository-code: 'https://github.com/rohansjoshi/Weak-Fanos'
 url: 'https://github.com/rohansjoshi/Weak-Fanos'
-abstract: >-
-  This repository contains functions for constructive smooth
-  projective toric varieties of Picard rank 3 (either as
-  projective bundles or Batyrev varieties), following
-  Batyrev. We also construct all such varieties that are
-  weak Fano. There are functions that automate the process
-  of producing the classification in any dimension, and
-  removing redundant isomorphic copies.
-date-released: '2025-04-18'
+year: '2025'
+month: '4'
 medium: \url{https://github.com/rohansjoshi/Weak-Fanos}
