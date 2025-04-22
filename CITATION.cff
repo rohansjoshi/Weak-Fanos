@@ -28,4 +28,3 @@ abstract: >-
   of producing the classification in any dimension, and
   removing redundant isomorphic copies.
 date-released: '2025-04-18'
-howpublished: '\url{https://github.com/rohansjoshi/Weak-Fanos}'
