@@ -4,7 +4,7 @@
 - Zhengning Hu
 - Rohan Joshi
 
-**Bibtex citation**
+**Bibtex citation:**
 ```
 @misc{weakFano-repo,
 author = {Hu, Zhengning and Joshi, Rohan},
