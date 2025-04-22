@@ -1,0 +1,29 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: Weak-Fanos
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Zhengning
+    family-names: Hu
+    email: zhengninghu@arizona.edu
+    affiliation: The University of Arizona
+    orcid: 'https://orcid.org/0000-0003-2413-281X'
+  - email: rohansjoshi@math.ucla.edu
+    family-names: Joshi
+    given-names: Rohan
+    affiliation: 'University of California, Los Angeles'
+repository-code: 'https://github.com/rohansjoshi/Weak-Fanos'
+abstract: >-
+  This repository contains functions for constructive smooth
+  projective toric varieties of Picard rank 3 (either as
+  projective bundles or Batyrev varieties), following
+  Batyrev. We also construct all such varieties that are
+  weak Fano. There are functions that automate the process
+  of producing the classification in any dimension, and
+  removing redundant isomorphic copies.
+date-released: '2025-04-18'
