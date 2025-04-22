@@ -4,6 +4,16 @@
 - Zhengning Hu
 - Rohan Joshi
 
+**Bibtex citation**
+```
+@misc{weakFano-repo,
+author = {Hu, Zhengning and Joshi, Rohan},
+title = {{Weak-Fanos}},
+howpublished = {\url{https://github.com/rohansjoshi/Weak-Fanos}},
+year = {2025},
+}
+```
+
 **Publication:**
 * *Classifying toric weak Fano varieties of Picard rank 3*, Zhengning Hu and Rohan Joshi. In preparation, 2025.
 
