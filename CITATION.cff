@@ -18,6 +18,7 @@ authors:
     given-names: Rohan
     affiliation: 'University of California, Los Angeles'
 repository-code: 'https://github.com/rohansjoshi/Weak-Fanos'
+url: 'https://github.com/rohansjoshi/Weak-Fanos'
 abstract: >-
   This repository contains functions for constructive smooth
   projective toric varieties of Picard rank 3 (either as
