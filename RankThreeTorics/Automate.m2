@@ -1,7 +1,7 @@
-needsPackage "NormalToricVarieties";
-needsPackage "ToricExtras"
-needsPackage "InvariantRing";
-load "Invariants.m2"
+--needsPackage "NormalToricVarieties";
+--needsPackage "ToricExtras"
+--needsPackage "InvariantRing";
+--load "Invariants.m2"
 
 -- Generate permutation matrices
 -- Unfortunately, permutationMatrix in the InvariantRing package only takes input in the form of cycle notation
@@ -9,7 +9,7 @@ load "Invariants.m2"
 -- so I am forced to implement permutation matrices myself. Feel free to optimize this (or look at the source code of the above implementations for reference)
 
 genRow = (i, n) -> (
-    l = {};
+    l := {};
     for ind from 0 to n-1 do (
         if ind == i then l = append(l, 1) else l = append(l, 0);
     );
@@ -17,8 +17,8 @@ genRow = (i, n) -> (
 )
 
 permMatrix = perm -> (
-    n = length perm;
-    mat = {};
+    n := length perm;
+    mat := {};
     for i in perm do (
         mat = append(mat, genRow(i, n));
     );
@@ -40,11 +40,11 @@ areIsomorphic = (X1, X2) -> (
         -- because a permutation is bijective, so the map on cones is injective (no two cones can be permuted to the same cone), and because the number of cones for X1 is same as X2
         -- it is also surjective, so it is a bijection on the sets of cones
         ( -- check that there is a matrix sending v_i to w_sigma(i) for all i
-            V = matrix rays X1;
-            W = matrix rays X2;
-            Wsig = (permMatrix perm) * W;
-            T = solve(V, Wsig, MaximalRank=>true); -- 'solve' uses row reduction over ZZ. Already implemented in Macaulay2 (InvariantRing package)
-            diffMatrix = V*T - Wsig;
+            V := matrix rays X1;
+            W := matrix rays X2;
+            Wsig := (permMatrix perm) * W;
+            T := solve(V, Wsig, MaximalRank=>true); -- 'solve' uses row reduction over ZZ. Already implemented in Macaulay2 (InvariantRing package)
+            diffMatrix := V*T - Wsig;
             diffMatrix == 0 and (try inverse T then true else false) -- to make sure inverse is also defined over ZZ
         )
     )
@@ -52,8 +52,8 @@ areIsomorphic = (X1, X2) -> (
 
 -- areIsomorphic = permutationIsomorphic;
 areIsomorphicInv = (P1, P2) -> (
-    (X1, l1) = P1;
-    (X2, l2) = P2;
+    (X1, l1) := P1;
+    (X2, l2) := P2;
     assert(length(l1) == length(l2));
     for i in 0 .. length(l1)-1 do (
         if l1#i != l2#i then return false;
@@ -61,8 +61,8 @@ areIsomorphicInv = (P1, P2) -> (
     return areIsomorphic(X1, X2);
 )
 areIsomorphicInvName = (P1, P2) -> (
-    (N1, X1, l1) = P1;
-    (N2, X2, l2) = P2;
+    (N1, X1, l1) := P1;
+    (N2, X2, l2) := P2;
     assert(length(l1) == length(l2));
     for i in 0 .. length(l1)-1 do (
         if l1#i != l2#i then return false;
@@ -72,9 +72,9 @@ areIsomorphicInvName = (P1, P2) -> (
 
 
 filterListRepeats = l -> (
-    currList = {};
+    currList := {};
     for entry in l do (
-        isInList = false;
+        isInList := false;
         for entry2 in currList do (
             if areIsomorphic(entry, entry2) then (
                 isInList = true;
@@ -89,9 +89,9 @@ filterListRepeats = l -> (
 )
 
 filterListRepeatsInv = l -> (
-    currList = {};
+    currList := {};
     for entry in l do (
-        isInList = false;
+        isInList := false;
         for entry2 in currList do (
             if areIsomorphicInv(entry, entry2) then (
                 isInList = true;
@@ -106,9 +106,9 @@ filterListRepeatsInv = l -> (
 )
 
 filterListRepeatsInvName = l -> (
-    currList = {};
+    currList := {};
     for entry in l do (
-        isInList = false;
+        isInList := false;
         for entry2 in currList do (
             if areIsomorphicInvName(entry, entry2) then (
                 isInList = true;
@@ -123,9 +123,9 @@ filterListRepeatsInvName = l -> (
 )
 
 filterListRepeatsInvNameVerbose = l -> (
-    currList = {};
+    currList := {};
     for entry in l do (
-        isInList = false;
+        isInList := false;
         for entry2 in currList do (
             if areIsomorphicInvName(entry, entry2) then (
                 isInList = true;
@@ -146,10 +146,10 @@ calculateInvariants = (l, invList) -> apply(l, X -> (X, apply(invList, inv -> in
 calculateInvariantsName = (l, invList) -> apply(l, P -> (P#0, P#1, apply(invList, inv -> inv(P#1))))
 
 printList = l -> (
-    counter = 1;
+    counter := 1;
     for entry in l do (
         << counter << ". ";
-        invariantNumbers = entry#1;
+        invariantNumbers := entry#1;
         if length entry > 2 then (
             for invariant in invariantNumbers do (  -- what is invariantNumbers here?
                 << invariant << "\t";
@@ -161,12 +161,12 @@ printList = l -> (
 ) 
 
 printListName = l -> (
-    counter = 1;
+    counter := 1;
     for entry in l do (
         << counter << ". ";
         << entry#0 << ":\t";
         if length entry > 2 then (
-            invariantNumbers = entry#2;
+            invariantNumbers := entry#2;
             for invariant in invariantNumbers do (  
                 << invariant << "\t";
             );

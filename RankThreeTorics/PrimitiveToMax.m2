@@ -27,7 +27,7 @@ toricPrimitiveCollections(List, List) := (pRays, maxCones) -> (
     Xs := apply(first entries vars R, i -> index i);
     maxConesComp := apply(maxCones, i -> toList(set Xs - set i));
     I := ideal apply(maxConesComp, i -> product apply(i, j -> x_j));
-    Ps := primaryDecomposition I;
+    Ps := primaryDecomposition(I);
     primitiveCollections := apply(Ps, i -> apply(first entries gens i, j -> index j));
     return primitiveCollections;
 )

@@ -15,6 +15,16 @@ anticanonicalDegree(NormalToricVariety) := X -> (
     return integral (c1^n);
 )
 
+-- The "genus" of a variety is the number g that satisfies 2g-2 = d, where d is the anticanonical degree.
+-- It really only has a geometric interpretation that makes sense in the case of Fano 3-folds. For a Fano 3-fold X, its anticanonical divisor is ample, and so (a multiple of it) defines an embedding into some projective space. Then a smooth hyperplane section of X is a surface S whose canonical divisor is zero by the adjunction formula: K_S = (K_X + H)_H = 0, since H is linearly equivalent to -K_X. So is a Calabi-Yau surface (I believe it can be proved S is a K3 surface). Anyway, if we intersect S with a hyperplane section, we get a curve C, and by the adjunction formula for surfaces we have 2g(C)-2 = (0+H_S).H = (H.H).H = H^3 = (-K_X)^3, which is the anticanonical degree --
+ 
+genusOfFanoThreefold = method();
+genusOfFanoThreefold(NormalToricVariety) := X -> (
+    assert isFano X;
+    assert (dim X == 3);
+    return 1 + (anticanonicalDegree X)/2;
+)
+
 
 -- Checks if two toric varieties are the same by a permutation of rays
 -- sufficient, but not necessary for isomorphism (??)

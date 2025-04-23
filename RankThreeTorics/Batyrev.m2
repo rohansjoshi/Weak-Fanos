@@ -1,4 +1,4 @@
-load "automate.m2"
+--load "Automate.m2"
 
 --- In this document:
 -- automate construction of Kleinschmidt pairs (n, l)
@@ -17,9 +17,9 @@ load "automate.m2"
 -- this is stated on the Macaulay2 Kleinschmidt page
 
 expandNondecreasingList = (l, total) -> (
-    newl = {};
-    lastelem = l#-1;
-    s = sum l;
+    newl := {};
+    lastelem := l#-1;
+    s := sum l;
     for i from lastelem to total-s do (
         newl = append(newl, join(l, {i}))
     );
@@ -27,11 +27,11 @@ expandNondecreasingList = (l, total) -> (
 );
 
 kleinschmidtInputs = d -> (
-    bigList = {};
+    bigList := {};
     for i in 0 .. d do bigList = append(bigList, {i});
-    currList = bigList;
+    currList := bigList;
     for lenList in 2 .. d-1 do (
-        newCurrList = {};
+        newCurrList := {};
         for l in currList do (
             newCurrList = join(newCurrList, expandNondecreasingList(l, d-lenList+1))
         );
@@ -70,7 +70,7 @@ kleinschmidtInputsFixed = d -> select(kleinschmidtInputs(d), l -> l#-1 != 0 or l
 generateLists = (len, minx, maxx) -> (
     if len == 0 then return {{}};
     lists := {}; -- need := since it's a local variable
-    subLists = generateLists(len - 1, minx, maxx);
+    subLists := generateLists(len - 1, minx, maxx);
     for i from minx to maxx do (
         for sublist in subLists do (
             lists = append(lists, prepend(i, sublist));
@@ -84,7 +84,7 @@ generateNondecreasingLists = (len, minx, maxx) -> (
     if len == 0 then return {{}};
     lists := {}; -- need := since it's a local variable
     for i from minx to maxx do (
-        subLists = generateNondecreasingLists(len - 1, i, maxx);
+        subLists := generateNondecreasingLists(len - 1, i, maxx);
         for sublist in subLists do (
             lists = append(lists, prepend(i, sublist));
         );
@@ -95,7 +95,7 @@ generateNondecreasingLists = (len, minx, maxx) -> (
 -- Function to generate all valid sequences (p, B, C) for a given d
 batyrevInputs = d -> (
     -- Initialize an empty list to store valid sequences
-    validSequences = {};
+    validSequences := {};
 
     -- Generate all possible lists p of length 5 with sum d + 3
     for p0 from 1 to d + 3 do
@@ -103,15 +103,15 @@ batyrevInputs = d -> (
             for p2 from 1 to d + 3 - p0 - p1 do
                 for p3 from 1 to d + 3 - p0 - p1 - p2 - 1 do (
                     p4 := d + 3 - p0 - p1 - p2 - p3;
-                    p = {p0, p1, p2, p3, p4};
+                    p := {p0, p1, p2, p3, p4};
 
                     -- Check if p2 - 1 >= 0 (to ensure C has nonnegative length)
                     if p2 - 1 >= 0 then (
                         -- Generate all possible lists B of length p3
-                        Bs = generateNondecreasingLists(p3, 0, d + 3);
+                        Bs := generateNondecreasingLists(p3, 0, d + 3);
 
                         -- Generate all possible lists C of length p2 - 1
-                        Cs = generateNondecreasingLists(p2 - 1, 0, d + 3);
+                        Cs := generateNondecreasingLists(p2 - 1, 0, d + 3);
 
                         -- Iterate over all combinations of B and C
                         for B in Bs do (
@@ -142,6 +142,8 @@ invariantList = {anticanonicalDegree, chernNumber} --, vectorFields, deformation
 batyrevVarietiesUnfiltered = d -> apply(batyrevInputs(d), inputs -> (inputs, batyrevConstructor(inputs)));
 batyrevVarieties = d -> filterListRepeatsInvName(calculateInvariantsName(apply(batyrevInputs(d), inputs -> (inputs, batyrevConstructor(inputs))), invariantList));
 batyrevVarietiesVerbose = d -> filterListRepeatsInvNameVerbose(calculateInvariantsName(apply(batyrevInputs(d), inputs -> (inputs, batyrevConstructor(inputs))), invariantList));
+
+weakFanoBatyrevVarieties = batyrevVarieties
 
 
 end----

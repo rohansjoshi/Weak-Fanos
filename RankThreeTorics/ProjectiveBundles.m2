@@ -1,4 +1,4 @@
-load "automate.m2"
+--load "Automate.m2"
 
 -- This helper function returns all lists of length n 
 -- whose entries are between l and u.
@@ -39,9 +39,9 @@ makePairs = (b, c) -> (for i in (0..(length b)-1) list ({b#i, c#i}))
 
 projectiveBundleConstructor = (d, a, ls) -> (
     -- change assert
-    X = kleinschmidt(d, a);
-    zeroD = toricDivisor(apply(toList(1..d+2), i -> 0), X);
-    lineBundles = {zeroD};
+    X := kleinschmidt(d, a);
+    zeroD := toricDivisor(apply(toList(1..d+2), i -> 0), X);
+    lineBundles := {zeroD};
     for l in ls do (lineBundles = append(lineBundles, toricDivisor(join({l#0}, apply(toList(1..d), i -> 0), {l#1}), X)));
     projectivizationOfBundle(lineBundles)
 )
@@ -59,16 +59,16 @@ projectiveBundleConstructor = (d, a, ls) -> (
 			-- If it is weak Fano, add to weak Fano list
 
 wFanoRankThreePCThreeBased = (d, d') -> (
-    wFanoList = {};
+    wFanoList := {};
     for a in kleinschmidtInputsFixed(d') do (
-        r = d' - length a;
-        baseVariety = kleinschmidt(d', a);
-        bs = nondecreasingLists(d-d', 0, d'-r+1);
-        cs = allLists(d-d', -(r+1 - sum a), r+1 - sum a);
+        r := d' - length a;
+        baseVariety := kleinschmidt(d', a);
+        bs := nondecreasingLists(d-d', 0, d'-r+1);
+        cs := allLists(d-d', -(r+1 - sum a), r+1 - sum a);
         for b in bs do (
             for c in cs do (
                 if (sum b <= d' - r + 1) and (sum c - (d-d'-1)*(min c) <= r+1 - sum a) and (checkDictionaryOrder(b, c)) then (
-                    X = projectiveBundleConstructor(d', a, makePairs(b, c));
+                    X := projectiveBundleConstructor(d', a, makePairs(b, c));
                     if isNef(-toricDivisor X) then wFanoList = append(wFanoList, ((d', a, makePairs(b, c)), X))
                 )
             )
@@ -80,6 +80,8 @@ wFanoRankThreePCThreeBased = (d, d') -> (
 projectiveBundleVarieties = d -> (
     filterListRepeatsInvName(calculateInvariantsName(flatten(for d' in 2..d-1 list wFanoRankThreePCThreeBased(d, d')), invariantList))
 )
+
+weakFanoProjectiveBundleVarieties = projectiveBundleVarieties
 
 end----
 

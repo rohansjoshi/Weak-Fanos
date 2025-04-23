@@ -1,6 +1,6 @@
-needsPackage "NormalToricVarieties"
-loadPackage("ToricExtras", Reload=>true)
-load "primitiveToMax.m2"
+--needsPackage "NormalToricVarieties"
+--loadPackage("ToricExtras", Reload=>true)
+--load "PrimitiveToMax.m2"
 
 -- An updated version 2025-3-12
 -- which can deal with repeated elements
@@ -10,7 +10,7 @@ minimalElements(List) := (L) -> (
     -- with input a list (of lists), the function will return another list 
     -- consisting of only minimal elements with respect to inclusion
     d := #L; -- length of the list
-    minimal = {};
+    minimal := {};
     for i from 0 to (d - 1) list (
         Li := L#i;
         flag := true;
@@ -33,8 +33,8 @@ minimalElementsAlt(List) := (L) -> (
     -- with input a list (of lists), the function will return another list 
     -- consisting of only minimal elements with respect to inclusion
     d := #L; -- length of the list
-    newList = L;
-    deleteList = {};
+    newList := L;
+    deleteList := {};
     for i from 0 to (d - 1) do (
         for j from 0 to (d - 1) do (
             if i != j and isSubset(L#j, L#i) and #(L#i) > #(L#j) then (
@@ -60,7 +60,7 @@ primitiveBlowup(NormalToricVariety, List) := (toricVariety, blowupCone) -> (
     d := #pRays#0; -- dimension of the fan
 
     -- check if the star subdivision is legitimate
-    count = 0;
+    count := 0;
     for i from 2 to d do (
         if isMember(sigma, orbits(X, d - i)) then count = count + 1
     );
@@ -69,33 +69,33 @@ primitiveBlowup(NormalToricVariety, List) := (toricVariety, blowupCone) -> (
         error erP;
     );
 
-    x = (for i from 0 to d - 1 list 0); 
+    x := (for i from 0 to d - 1 list 0); 
     for i from 0 to (#sigma - 1) do x = x + (pRays#(sigma#i));
-    newRays = append(pRays, x); -- set of rays for the blowup 
+    newRays := append(pRays, x); -- set of rays for the blowup 
 
-    pCollections = toricPrimitiveCollections(pRays, mCones); -- the original set of PCs
+    pCollections := toricPrimitiveCollections(pRays, mCones); -- the original set of PCs
 
     -- the new set of primitive collections contains 3 parts:
     -- 1. the cone along which we blow up
-    P1 = {sigma};
+    P1 := {sigma};
     -- 2. the original PCs which do not contain the cone sigma
-    P2 = {};
+    P2 := {};
     for i from 0 to (#pCollections - 1) do (
         if not isSubset(sigma, pCollections#i) then P2 = append(P2, pCollections#i)
     );
     -- 3. the minimal elements of original PC with element in sigma replaced by the ray x
-    tempP3 = {};
+    tempP3 := {};
     for i from 0 to (#pCollections - 1) do (
         if #(set(pCollections#i) * set(sigma)) > 0 then tempP3 = append(tempP3, toList(set(pCollections#i) - set(sigma)))
     );
     tempP3 = minimalElements(tempP3);
-    P3 = for i from 0 to (#tempP3 - 1) list append(tempP3#i, #newRays - 1);
+    P3 := for i from 0 to (#tempP3 - 1) list append(tempP3#i, #newRays - 1);
     
     -- New primitive collections after star subdivision
-    newP = toList(set P1 + set P2 + set P3);
+    newP := toList(set P1 + set P2 + set P3);
 
     -- Resulting toric variety after blowup
-    newToricVariety = normalToricVariety(newRays, toricMaxcones(newRays, newP));
+    newToricVariety := normalToricVariety(newRays, toricMaxcones(newRays, newP));
 
     -- Return the new toric variety
     return newToricVariety
@@ -111,8 +111,8 @@ primitiveBlowdown(NormalToricVariety, List) := (toricVariety, blowdownPC) -> (
     pRays := rays X;
     mCones := max X;
     d := #pRays#0; -- dimension of the fan
-    pCollections = toricPrimitiveCollections(pRays, mCones);
-    pCollectionsSet = for i from 0 to (#pCollections - 1) list set(pCollections#i);
+    pCollections := toricPrimitiveCollections(pRays, mCones);
+    pCollectionsSet := for i from 0 to (#pCollections - 1) list set(pCollections#i);
 
     -- check if the blowdown is legitimate
     if not isMember(set(sigma), pCollectionsSet) then (
@@ -120,7 +120,7 @@ primitiveBlowdown(NormalToricVariety, List) := (toricVariety, blowdownPC) -> (
         error erP;
     );
 
-    x = (for i from 0 to d - 1 list 0);
+    x := (for i from 0 to d - 1 list 0);
     for i from 0 to (#sigma - 1) do x = x + (pRays#(sigma#i));
     -- legitimate check
     if not isMember(x, pRays) then (
@@ -128,19 +128,19 @@ primitiveBlowdown(NormalToricVariety, List) := (toricVariety, blowdownPC) -> (
         error erQ;
     );
 
-    newRays = delete(x, pRays);
-    posDelete = position(pRays, i -> i == x);
+    newRays := delete(x, pRays);
+    posDelete := position(pRays, i -> i == x);
 
     -- the new set of primitive collections contains 2 parts:
     -- 1. the original PCs excluding sigma, not containing ray x
-    P1 = {};
+    P1 := {};
     for i from 0 to (#pCollections - 1) do (
-        raysPC = for j from 0 to (#pCollections#i - 1) list pRays#(pCollections#i#j);
+        raysPC := for j from 0 to (#pCollections#i - 1) list pRays#(pCollections#i#j);
         if set(pCollections#i) =!= set(sigma) and not isMember(x, raysPC) then P1 = append(P1, pCollections#i)
     );
     -- shift 
-    shiftP1 = for i from 0 to (#P1 - 1) list (
-        PC = {};
+    shiftP1 := for i from 0 to (#P1 - 1) list (
+        PC := {};
         for j from 0 to (#P1#i - 1) do (
             if P1#i#j > posDelete then PC = append(PC, P1#i#j - 1)
             else PC = append(PC, P1#i#j)
@@ -150,23 +150,23 @@ primitiveBlowdown(NormalToricVariety, List) := (toricVariety, blowdownPC) -> (
 
     -- 2. replace x by sigma, for original PCs including x but
     --    replacing x by any subset of sigma is not contained in the original sets of PCs
-    tempP2 = {};
+    tempP2 := {};
     for i from 0 to (#pCollections - 1) do (
-        raysPC = for j from 0 to (#pCollections#i - 1) list pRays#(pCollections#i#j);
+        raysPC := for j from 0 to (#pCollections#i - 1) list pRays#(pCollections#i#j);
         if isMember(x, raysPC) then (
-            pos = position(pRays, k -> k == x);
+            pos := position(pRays, k -> k == x);
             tempP2 = append(tempP2, delete(pos, pCollections#i))
         );
     );
-    S = subsets(sigma);
-    P2 = {};
+    S := subsets(sigma);
+    P2 := {};
     for i from 0 to (#tempP2 - 1) do (
         union = set(for j from 0 to (#S - 1) list set(tempP2#i) + set(S#j));
         if #(union * set(pCollectionsSet)) == 0 then P2 = append(P2, toList(set(tempP2#i) + set(sigma))) 
     );
     -- shift 
-    shiftP2 = for i from 0 to (#P2 - 1) list (
-        PC = {};
+    shiftP2 := for i from 0 to (#P2 - 1) list (
+        PC := {};
         for j from 0 to (#P2#i - 1) do (
             if P2#i#j > posDelete then PC = append(PC, P2#i#j - 1)
             else PC = append(PC, P2#i#j)
@@ -175,10 +175,10 @@ primitiveBlowdown(NormalToricVariety, List) := (toricVariety, blowdownPC) -> (
     );
     
     -- New primitive collections after blowdown
-    newP = toList(set shiftP1 + set shiftP2);
+    newP := toList(set shiftP1 + set shiftP2);
 
     -- Resulting toric variety after blowdown
-    newToricVariety = normalToricVariety(newRays, toricMaxcones(newRays, newP));
+    newToricVariety := normalToricVariety(newRays, toricMaxcones(newRays, newP));
 
     -- Return the new toric variety
     return newToricVariety
