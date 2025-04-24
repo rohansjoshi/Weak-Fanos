@@ -15,6 +15,7 @@ newPackage(
     },
     Headline => "Constructing Fano and weak Fano Picard rank 3 toric varieties",
     Keywords => {"Toric Geometry"},
+    PackageExports => {"NormalToricVarieties", "ToricExtras"},
     PackageImports => {"NormalToricVarieties", "ToricExtras", "InvariantRing", "PrimaryDecomposition"},
     DebuggingMode => true
     )
@@ -30,9 +31,13 @@ export {
     "printList",
     "printListName",
     -- from Batyrev.m2:
+    "FanoKleinschmidtVarieties",
+    "weakFanoKleinschmidtVarieties",
+    "FanoBatyrevVarieties",
     "weakFanoBatyrevVarieties",
     -- from ProjectiveBundles.m2:
     "projectiveBundleConstructor",
+    "FanoProjectiveBundleVarieties",
     "weakFanoProjectiveBundleVarieties",
     -- from PrimitiveToMax.m2
     "toricMaxcones",

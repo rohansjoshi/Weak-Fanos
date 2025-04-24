@@ -47,7 +47,7 @@ projectiveBundleConstructor = (d, a, ls) -> (
 )
 
 ------- Steps:
--- Construct all (weak Fano) Kleinschmidts inputs (d', a_1, ... a_r)
+-- Construct all (weak) Fano Kleinschmidts inputs (d', a_1, ... a_r)
 -- For each input d', (a_1, ... a_r)
 	-- Construct the variety X_d'(a_1, ... a_r)
 	-- Create the list of possible bs
@@ -55,12 +55,34 @@ projectiveBundleConstructor = (d, a, ls) -> (
 	-- For each pair of b and c
 		-- If the b and c actually satisfy the inequalities, and if it is in "dictionary order",
 			-- Construct the associated projective bundle
-			-- If it is Fano, add to Fano list
-			-- If it is weak Fano, add to weak Fano list
+			-- If it is (weak) Fano, add to list
 
-wFanoRankThreePCThreeBased = (d, d') -> (
-    wFanoList := {};
-    for a in kleinschmidtInputsFixed(d') do (
+FanoRankThreePCThreeBased = (d, d') -> (
+    FanoList := {};
+    for a in FanoKleinschmidtInputsFixed(d') do (
+        r := d' - length a;
+        baseVariety := kleinschmidt(d', a);
+        bs := nondecreasingLists(d-d', 0, d'-r+1);
+        cs := allLists(d-d', -(r+1 - sum a), r+1 - sum a);
+        for b in bs do (
+            for c in cs do (
+                if (sum b < d' - r + 1) and (sum c - (d-d'-1)*(min c) < r+1 - sum a) and (checkDictionaryOrder(b, c)) then (
+                    X := projectiveBundleConstructor(d', a, makePairs(b, c));
+                    if (isFano X) then FanoList = append(FanoList, ((d', a, makePairs(b, c)), X))
+                )
+            )
+        )
+    );
+    FanoList
+)
+
+FanoProjectiveBundleVarieties = d -> (
+    filterListRepeatsInvName(calculateInvariantsName(flatten(for d' in 2..d-1 list FanoRankThreePCThreeBased(d, d')), invariantList))
+)
+
+weakFanoRankThreePCThreeBased = (d, d') -> (
+    weakFanoList := {};
+    for a in weakFanoKleinschmidtInputsFixed(d') do (
         r := d' - length a;
         baseVariety := kleinschmidt(d', a);
         bs := nondecreasingLists(d-d', 0, d'-r+1);
@@ -69,23 +91,16 @@ wFanoRankThreePCThreeBased = (d, d') -> (
             for c in cs do (
                 if (sum b <= d' - r + 1) and (sum c - (d-d'-1)*(min c) <= r+1 - sum a) and (checkDictionaryOrder(b, c)) then (
                     X := projectiveBundleConstructor(d', a, makePairs(b, c));
-                    if isNef(-toricDivisor X) then wFanoList = append(wFanoList, ((d', a, makePairs(b, c)), X))
+                    if isNef(-toricDivisor X) then weakFanoList = append(weakFanoList, ((d', a, makePairs(b, c)), X))
                 )
             )
         )
     );
-    wFanoList
+    weakFanoList
 )
 
-projectiveBundleVarieties = d -> (
-    filterListRepeatsInvName(calculateInvariantsName(flatten(for d' in 2..d-1 list wFanoRankThreePCThreeBased(d, d')), invariantList))
+weakFanoProjectiveBundleVarieties = d -> (
+    filterListRepeatsInvName(calculateInvariantsName(flatten(for d' in 2..d-1 list weakFanoRankThreePCThreeBased(d, d')), invariantList))
 )
-
-weakFanoProjectiveBundleVarieties = projectiveBundleVarieties
 
 end----
-
-printListName(projectiveBundleVarieties(3))
-printListName(projectiveBundleVarieties(4))
-printListName(projectiveBundleVarieties(5))
--- printListName(projectiveBundleVarieties(6))
