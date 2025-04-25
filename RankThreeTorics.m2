@@ -36,7 +36,7 @@ export {
     "weakFanoKleinschmidtVarieties",
     "FanoBatyrevVarieties",
     "weakFanoBatyrevVarieties",
-    "weakFanoBatyrevVarietiesVerbose",
+    -- "weakFanoBatyrevVarietiesVerbose",
     -- from ProjectiveBundles.m2:
     "projectiveBundleConstructor",
     "FanoProjectiveBundleVarieties",
@@ -83,6 +83,8 @@ doc ///
 ///
 
 load "./RankThreeTorics/AutomateDocumentation.m2"
+
+load "./RankThreeTorics/PrimitiveToMaxDocumentation.m2"
 
 ------------------------------------------------------------------------------
 -- TESTS

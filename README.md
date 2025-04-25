@@ -65,31 +65,17 @@ i3 : printListName(weakFanoBatyrevVarieties(3))
 10. ({2, 1, 1, 1, 1}, {2}, {}):       58        24   
 ```
 
-There are many routines in the `RankThreeTorics` package which are generally useful for working with toric varieties. For example, the function `areIsomorphic`, which checks if two toric varieties are isomorphic. 
+There are many routines in the `RankThreeTorics` package which are generally useful for working with toric varieties. For example, the function `areIsomorphic`, which checks if two toric varieties are isomorphic. To see the functions in this package, you can run `viewHelp`.
 
 ```
-i1 : loadPackage "RankThreeTorics"
+i1 : installPackage "RankThreeTorics"
 
 o1 = RankThreeTorics
 
 o1 : Package
 
-i2 : hirzebruchSurface 2
-
-o2 = normalToricVariety ({{1, 0}, {0, 1}, {-1, 2}, {0, -1}}, {{0, 1}, {0, 3}, {1, 2}, {2, 3}})
-
-o2 : NormalToricVariety
-
-i3 : normalToricVariety({{1, -1}, {1, 0}, {1, 1}, {-1, 0}}, {{0, 1}, {1, 2}, {2, 3}, {0, 3}}) 
-
-o3 = normalToricVariety ({{1, -1}, {1, 0}, {1, 1}, {-1, 0}}, {{0, 1}, {0, 3}, {1, 2}, {2, 3}})
-
-o3 : NormalToricVariety
-
-i4 : areIsomorphic(o2, o3)
-
-o4 = true
+i2 : viewHelp RankThreeTorics
 
 ```
 
-Included in this repository is a package called `ToricExtras` which was written at the 2024 Macaulay2 workshop (and will eventually will be incorporated into `NormalToricVarieties`).
+Included in this repository is a package called `ToricExtras` which was written at the 2024 Macaulay2 workshop (and will eventually will be incorporated into `NormalToricVarieties`). Note that the function `batyrevConstructor` is in `ToricExtras`, not `RankThreeTorics`.
