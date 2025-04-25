@@ -5,7 +5,9 @@
 needsPackage "NormalToricVarieties"
 
 
--- Anticanonical degree of a toric variety, i.e. (-K)^n where n is the dimension of the variety and K is the canonical divisor. This is also the Chern number c_1 ^ n, since c_1 of the tangent bundle is c_1 of the determinant of the tangent bundle, so it is (-1)^n times the determinant of the cotangent bundle (i.e. the canonical bundle), so it is (-1)^n * K^n = (-K)^n  --
+-- Anticanonical degree of a toric variety, i.e. (-K)^n where n is the dimension of the variety and K is the canonical divisor. 
+-- This is also the Chern number c_1 ^ n, since c_1 of the tangent bundle is c_1 of the determinant of the tangent bundle, 
+-- so it is (-1)^n times the determinant of the cotangent bundle (i.e. the canonical bundle), so it is (-1)^n * K^n = (-K)^n  
 
 anticanonicalDegree = method();
 anticanonicalDegree(NormalToricVariety) := X -> (
@@ -16,7 +18,12 @@ anticanonicalDegree(NormalToricVariety) := X -> (
 )
 
 -- The "genus" of a variety is the number g that satisfies 2g-2 = d, where d is the anticanonical degree.
--- It really only has a geometric interpretation that makes sense in the case of Fano 3-folds. For a Fano 3-fold X, its anticanonical divisor is ample, and so (a multiple of it) defines an embedding into some projective space. Then a smooth hyperplane section of X is a surface S whose canonical divisor is zero by the adjunction formula: K_S = (K_X + H)_H = 0, since H is linearly equivalent to -K_X. So is a Calabi-Yau surface (I believe it can be proved S is a K3 surface). Anyway, if we intersect S with a hyperplane section, we get a curve C, and by the adjunction formula for surfaces we have 2g(C)-2 = (0+H_S).H = (H.H).H = H^3 = (-K_X)^3, which is the anticanonical degree --
+-- It really only has a geometric interpretation that makes sense in the case of Fano 3-folds. For a Fano 3-fold X, 
+-- its anticanonical divisor is ample, and so (a multiple of it) defines an embedding into some projective space. 
+-- Then a smooth hyperplane section of X is a surface S whose canonical divisor is zero by the adjunction formula: 
+-- K_S = (K_X + H)_H = 0, since H is linearly equivalent to -K_X. So is a Calabi-Yau surface (I believe it can be 
+-- proved S is a K3 surface). Anyway, if we intersect S with a hyperplane section, we get a curve C, and by the adjunction 
+-- formula for surfaces we have 2g(C)-2 = (0+H_S).H = (H.H).H = H^3 = (-K_X)^3, which is the anticanonical degree
  
 genusOfFanoThreefold = method();
 genusOfFanoThreefold(NormalToricVariety) := X -> (
@@ -50,7 +57,8 @@ Omega1D(NormalToricVariety, ToricDivisor) := (X, D) -> (
 );
 
 
--- Calculates the tensor product of two sheaves on toric varieties, using Hom-tensor adjunction: F tensor G = Hom(F^*, G) = Hom(Hom(F, O), G)
+-- Calculates the tensor product of two sheaves on toric varieties, using Hom-tensor adjunction: 
+-- F tensor G = Hom(F^*, G) = Hom(Hom(F, O), G)
 -- When I tried ** it didn't work
 tensor2Sheaves = method();
 tensor2Sheaves(NormalToricVariety, CoherentSheaf, CoherentSheaf) := (X, sheaf1, sheaf2) -> (prune sheafHom(prune sheafHom(sheaf1, sheaf(X, ring X)), sheaf2));

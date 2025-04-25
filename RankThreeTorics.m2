@@ -7,11 +7,12 @@ newPackage(
     Date => "April 23, 2025",
     Authors => {{
             Name => "Zhengning Hu",
-            Email => "zhengninghu@arizona.edu"},
+            Email => "zhengninghu@arizona.edu",
+            HomePage => "https://sites.google.com/math.arizona.edu/zhengninghu/home"},
         {
 	        Name => "Rohan Joshi",
 	        Email => "rohansjoshi@math.ucla.edu",
-            HomePage => "math.ucla.edu/~rohansjoshi"}
+            HomePage => "https://www.math.ucla.edu/~rohansjoshi"}
     },
     Headline => "Constructing Fano and weak Fano Picard rank 3 toric varieties",
     Keywords => {"Toric Geometry"},
@@ -35,6 +36,7 @@ export {
     "weakFanoKleinschmidtVarieties",
     "FanoBatyrevVarieties",
     "weakFanoBatyrevVarieties",
+    "weakFanoBatyrevVarietiesVerbose",
     -- from ProjectiveBundles.m2:
     "projectiveBundleConstructor",
     "FanoProjectiveBundleVarieties",
@@ -80,9 +82,7 @@ doc ///
 
 ///
 
-
---load "./ToricExtras/BatyrevDocs.m2"
---load "./ToricExtras/ToricLinearSeriesDocs.m2"
+load "./RankThreeTorics/AutomateDocumentation.m2"
 
 ------------------------------------------------------------------------------
 -- TESTS

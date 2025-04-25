@@ -64,7 +64,7 @@ newPackage(
         {
 	        Name => "Rohan Joshi",
 	        Email => "rohansjoshi@math.ucla.edu",
-            HomePage => "math.ucla.edu/~rohansjoshi"},
+            HomePage => "https://www.math.ucla.edu/~rohansjoshi"},
         {
             Name => "Samikshaya Ananthakrishnan",
             Email => "samikshaya@berkeley.edu"}
