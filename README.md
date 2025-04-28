@@ -75,7 +75,6 @@ o1 = RankThreeTorics
 o1 : Package
 
 i2 : viewHelp RankThreeTorics
-
 ```
 
 Included in this repository is a package called `ToricExtras` which was written at the 2024 Macaulay2 workshop (and will eventually will be incorporated into `NormalToricVarieties`). Note that the function `batyrevConstructor` is in `ToricExtras`, not `RankThreeTorics`.

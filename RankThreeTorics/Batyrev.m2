@@ -30,42 +30,56 @@ FanoKleinschmidtInputs = d -> (
     bigList := {};
     for i in 0 .. d-1 do bigList = append(bigList, {i});
     currList := bigList;
+    bigList = apply(bigList, As -> (d, As));
     for lenList in 2 .. d-1 do (
         newCurrList := {};
         for l in currList do (
             newCurrList = join(newCurrList, expandNondecreasingList(l, d-lenList)) --no +1 for strict inequality
         );
-        bigList = join(bigList, newCurrList);
+        bigList = join(bigList, apply(newCurrList, As -> (d, As)));
         currList = newCurrList
     );
     bigList
 );
 
-FanoKleinschmidtInputsFixed = d -> select(FanoKleinschmidtInputs(d), l -> l#-1 != 0 or length l <= d/2)
+-- FanoKleinschmidtInputsFixed = d -> select(FanoKleinschmidtInputs(d), l -> l#-1 != 0 or length l <= d/2)
 
 
 weakFanoKleinschmidtInputs = d -> (
     bigList := {};
     for i in 0 .. d do bigList = append(bigList, {i});
     currList := bigList;
+    bigList = apply(bigList, As -> (d, As));
     for lenList in 2 .. d-1 do (
         newCurrList := {};
         for l in currList do (
             newCurrList = join(newCurrList, expandNondecreasingList(l, d-lenList+1))
         );
-        bigList = join(bigList, newCurrList);
+        bigList = join(bigList, apply(newCurrList, As -> (d, As)));
         currList = newCurrList
     );
     bigList
 );
 
-weakFanoKleinschmidtInputsFixed = d -> select(weakFanoKleinschmidtInputs(d), l -> l#-1 != 0 or length l <= d/2)
+-- weakFanoKleinschmidtInputsFixed = d -> select(weakFanoKleinschmidtInputs(d), l -> l#-1 != 0 or length l <= d/2)
 
 
-FanoKleinschmidtVarieties = d -> apply(FanoKleinschmidtInputsFixed(d), inputs -> ((d, inputs), kleinschmidt(d, inputs)));
+kleinschmidtIsomorphismFilter = varieties -> select(varieties, input -> (
+    d := input#0;
+    As := input#1;
+    As#-1 != 0 or length As <= d/2)
+);
 
-weakFanoKleinschmidtVarieties = d -> apply(weakFanoKleinschmidtInputsFixed(d), 
-    inputs -> ((d, inputs), kleinschmidt(d, inputs)));
+FanoKleinschmidtVarieties = d -> apply(kleinschmidtIsomorphismFilter(FanoKleinschmidtInputs(d)), inputs -> (inputs, kleinschmidt(inputs)));
+
+-- FanoKleinschmidtVarieties = d -> apply(FanoKleinschmidtInputsFixed(d), inputs -> ((d, inputs), kleinschmidt(d, inputs)));
+
+--weakFanoKleinschmidtVarieties = d -> apply(weakFanoKleinschmidtInputsFixed(d), 
+--     inputs -> ((d, inputs), kleinschmidt(d, inputs)));
+
+weakFanoKleinschmidtVarieties = d -> apply(kleinschmidtIsomorphismFilter(weakFanoKleinschmidtInputs(d)), 
+    inputs -> (inputs, kleinschmidt(inputs)));
+
 
 
 -- Generating valid Batyrev inputs
@@ -207,19 +221,29 @@ weakFanoBatyrevInputs = d -> (
     validSequences
 );
 
-invariantList = {anticanonicalDegree, chernNumber} --, vectorFields, deformationSpace, obstructionSpace, omegaInvariant}
+batyrevIsomorphismFilter = varieties -> select(varieties, triple -> (
+    p := triple#0;
+    Bs := triple#1;
+    Cs := triple#2;
+    sum Bs > 0 or sum Cs > 0 or p#0 < p#2 or (p#0 == p#2 and p#3 <= p#4))
+);
 
-FanoBatyrevVarietiesUnfiltered = d -> apply(FanoBatyrevInputs(d), inputs -> (inputs, batyrevConstructor(inputs)));
-FanoBatyrevVarieties = d -> filterListRepeatsInvName(calculateInvariantsName(apply(FanoBatyrevInputs(d), 
-    inputs -> (inputs, batyrevConstructor(inputs))), invariantList));
-FanoBatyrevVarietiesVerbose = d -> filterListRepeatsInvNameVerbose(calculateInvariantsName(apply(FanoBatyrevInputs(d), 
-    inputs -> (inputs, batyrevConstructor(inputs))), invariantList));
+
+-- invariantList = {anticanonicalDegree, chernNumber} --, vectorFields, deformationSpace, obstructionSpace, omegaInvariant}
+
+--FanoBatyrevVarietiesUnfiltered = d -> apply(FanoBatyrevInputs(d), inputs -> (inputs, batyrevConstructor(inputs)));
+FanoBatyrevVarieties = d -> apply(batyrevIsomorphismFilter(FanoBatyrevInputs(d)), inputs -> (inputs, batyrevConstructor(inputs)));
+--FanoBatyrevVarieties = d -> filterListRepeatsInvName(calculateInvariantsName(apply(FanoBatyrevInputs(d), 
+--    inputs -> (inputs, batyrevConstructor(inputs))), invariantList));
+--FanoBatyrevVarietiesVerbose = d -> filterListRepeatsInvNameVerbose(calculateInvariantsName(apply(FanoBatyrevInputs(d), 
+--    inputs -> (inputs, batyrevConstructor(inputs))), invariantList));
 
 
-weakFanoBatyrevVarietiesUnfiltered = d -> apply(weakFanoBatyrevInputs(d), inputs -> (inputs, batyrevConstructor(inputs)));
-weakFanoBatyrevVarieties = d -> filterListRepeatsInvName(calculateInvariantsName(apply(weakFanoBatyrevInputs(d), 
-    inputs -> (inputs, batyrevConstructor(inputs))), invariantList));
-weakFanoBatyrevVarietiesVerbose = d -> filterListRepeatsInvNameVerbose(calculateInvariantsName(apply(weakFanoBatyrevInputs(d), 
-    inputs -> (inputs, batyrevConstructor(inputs))), invariantList));
+--weakFanoBatyrevVarietiesUnfiltered = d -> apply(weakFanoBatyrevInputs(d), inputs -> (inputs, batyrevConstructor(inputs)));
+weakFanoBatyrevVarieties = d -> apply(batyrevIsomorphismFilter(weakFanoBatyrevInputs(d)), inputs -> (inputs, batyrevConstructor(inputs)));
+--weakFanoBatyrevVarieties = d -> filterListRepeatsInvName(calculateInvariantsName(apply(weakFanoBatyrevInputs(d), 
+--    inputs -> (inputs, batyrevConstructor(inputs))), invariantList));
+--weakFanoBatyrevVarietiesVerbose = d -> filterListRepeatsInvNameVerbose(calculateInvariantsName(apply(weakFanoBatyrevInputs(d), 
+--    inputs -> (inputs, batyrevConstructor(inputs))), invariantList));
 
 end----

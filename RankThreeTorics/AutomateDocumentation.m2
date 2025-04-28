@@ -17,5 +17,7 @@ doc ///
         Example
             X1 = normalToricVariety({{1, -1}, {1, 0}, {1, 1}, {-1, 0}}, {{0, 1}, {1, 2}, {2, 3}, {0, 3}}) 
             X2 = hirzebruchSurface 2
+            rays X2
+            max X2
             areIsomorphic(X1, X2)
 ///

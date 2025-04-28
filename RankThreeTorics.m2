@@ -36,7 +36,6 @@ export {
     "weakFanoKleinschmidtVarieties",
     "FanoBatyrevVarieties",
     "weakFanoBatyrevVarieties",
-    -- "weakFanoBatyrevVarietiesVerbose",
     -- from ProjectiveBundles.m2:
     "projectiveBundleConstructor",
     "FanoProjectiveBundleVarieties",
@@ -96,9 +95,8 @@ TEST ///
     assert isWellDefined X
 ///
 
---load "./ToricExtras/ToricLinearSeriesTests.m2"
---load "./ToricExtras/BatyrevTests.m2"
---load "./ToricExtras/ProjectiveBundlesDivisorsTests.m2"
+load "./RankThreeTorics/RankThreeToricsTests.m2"
+
 
 end---------------------------------------------------------------------------
 

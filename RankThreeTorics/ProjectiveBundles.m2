@@ -59,7 +59,8 @@ projectiveBundleConstructor = (d, a, ls) -> (
 
 FanoRankThreePCThreeBased = (d, d') -> (
     FanoList := {};
-    for a in FanoKleinschmidtInputsFixed(d') do (
+    for input in FanoKleinschmidtInputs(d') do (
+        a := input#1;
         r := d' - length a;
         baseVariety := kleinschmidt(d', a);
         bs := nondecreasingLists(d-d', 0, d'-r+1);
@@ -82,7 +83,8 @@ FanoProjectiveBundleVarieties = d -> (
 
 weakFanoRankThreePCThreeBased = (d, d') -> (
     weakFanoList := {};
-    for a in weakFanoKleinschmidtInputsFixed(d') do (
+    for input in weakFanoKleinschmidtInputs(d') do (
+        a := input#1;
         r := d' - length a;
         baseVariety := kleinschmidt(d', a);
         bs := nondecreasingLists(d-d', 0, d'-r+1);
