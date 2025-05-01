@@ -161,7 +161,7 @@ primitiveBlowdown(NormalToricVariety, List) := (toricVariety, blowdownPC) -> (
     S := subsets(sigma);
     P2 := {};
     for i from 0 to (#tempP2 - 1) do (
-        union = set(for j from 0 to (#S - 1) list set(tempP2#i) + set(S#j));
+        union := set(for j from 0 to (#S - 1) list set(tempP2#i) + set(S#j));
         if #(union * set(pCollectionsSet)) == 0 then P2 = append(P2, toList(set(tempP2#i) + set(sigma))) 
     );
     -- shift 

@@ -95,6 +95,7 @@ TEST ///
     assert isWellDefined X
 ///
 
+load "./RankThreeTorics/AutomateTests.m2"
 load "./RankThreeTorics/RankThreeToricsTests.m2"
 
 

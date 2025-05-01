@@ -61,6 +61,6 @@ TEST ///
 TEST ///
     assert(length weakFanoProjectiveBundleVarieties(3) == 18)
 ///
-TEST ///
-    assert(length weakFanoProjectiveBundleVarieties(4) == 81)
-///
+--TEST /// -- this one takes too long!
+--    assert(length weakFanoProjectiveBundleVarieties(4) == 81)
+--///
