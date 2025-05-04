@@ -8,7 +8,7 @@ newPackage(
     Authors => {{
             Name => "Zhengning Hu",
             Email => "zhengninghu@arizona.edu",
-            HomePage => "https://sites.google.com/math.arizona.edu/zhengninghu/home"},
+            HomePage => "https://zhengninghu.github.io"},
         {
 	        Name => "Rohan Joshi",
 	        Email => "rohansjoshi@math.ucla.edu",
