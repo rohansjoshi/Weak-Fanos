@@ -15,7 +15,7 @@ year = {2025},
 ```
 
 **Publication:**
-* *Classifying toric weak Fano varieties of Picard rank 3*, Zhengning Hu and Rohan Joshi. In preparation, 2025.
+* [*Classifying weak Fano toric varieties of Picard rank 3*](https://arxiv.org/abs/2506.00715), Zhengning Hu and Rohan Joshi. 2025.
 
 This repository contains Macaulay 2 functions for constructive smooth projective toric varieties of Picard rank 3 (either as projective bundles or Batyrev varieties), following Batyrev. We also construct all such varieties that are weak Fano. Everything we have written is in a Macaulay2 package called `RankThreeTorics`. 
 
